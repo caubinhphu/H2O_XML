@@ -41,7 +41,6 @@
                                 </xs:simpleType>
                             </xs:element>
                             <xs:element name="TEN_VATTU" type="xs:string"/>
-                            <xs:element name="CHIPHI_BOITHUONG" type="xs:positiveInteger"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -90,7 +89,7 @@
                             <xs:element name="MAPHONG">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                                        <xs:pattern value="[A-Z]{2,3}\d{3}"/>
+                                        <xs:pattern value="\d{3}"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
@@ -111,7 +110,14 @@
                                 </xs:simpleType>
                             </xs:element>
                             <xs:element name="HOTEN_KHACH" type="xs:string"/>
-                            <xs:element name="GIOITINH" type="xs:boolean"/>
+                            <xs:element name="GIOITINH">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Nam"/>
+                                        <xs:enumeration value="Nữ"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
                             <xs:element name="NGAYSINH" type="xs:date"/>
                             <xs:element name="CMND_PASSPORT" type="xs:string"/>
                             <xs:element name="DIENTHOAI" type="sdt"/>
@@ -125,13 +131,20 @@
                             <xs:element name="MA_NHANVIEN">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                                        <xs:pattern value="\d{9}"/>
+                                        <xs:pattern value="NV\d{2,}"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
                             <xs:element name="PASSWORD" type="xs:string"/>
                             <xs:element name="HOTEN_NHANVIEN" type="xs:string"/>
-                            <xs:element name="GIOITINH" type="xs:boolean"/>
+                            <xs:element name="GIOITINH">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Nam"/>
+                                        <xs:enumeration value="Nữ"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
                             <xs:element name="NGAYSINH" type="xs:date"/>
 
                             <xs:element name="CMND">
@@ -176,8 +189,8 @@
                             <xs:element name="MAKHACH" type="xs:string"/>
                             <xs:element name="MA_NHANVIEN" type="xs:string"/>
                             <xs:element name="NGAYLAP_PHIEU" type="xs:date"/>
-                            <xs:element name="NGAYDEN" type="xs:dateTime"/>
-                            <xs:element name="NGAYDI" type="xs:dateTime"/>
+                            <xs:element name="NGAYDEN" type="xs:date"/>
+                            <xs:element name="NGAYDI" type="xs:date"/>
                         </xs:sequence>
                         <xs:attribute name="DATRAPHONG" type="xs:boolean" default="0"/>
                     </xs:complexType>
@@ -199,16 +212,6 @@
                             <xs:element name="MA_DICHVU" type="xs:string"/>
                             <xs:element name="SOLUONG" type="xs:unsignedByte"/>
                             <xs:element name="GIA_DICHVU" type="xs:positiveInteger"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="TONTHAT" maxOccurs="unbounded" minOccurs="0">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="SO_PHIEU" type="xs:string"/>
-                            <xs:element name="MA_VATTU" type="xs:string"/>
-                            <xs:element name="SOLUONG" type="xs:unsignedByte"/>
-                            <xs:element name="CHIPHI_BOITHUONG" type="xs:positiveInteger"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -300,19 +303,6 @@
         <xs:keyref name="CTDVKR2" refer="DVK">
             <xs:selector xpath="CT_THUE_DICHVU"/>
             <xs:field xpath="MA_DICHVU"/>
-        </xs:keyref>
-        <xs:key name="TTHK">
-            <xs:selector xpath="TONTHAT"/>
-            <xs:field xpath="SO_PHIEU"/>
-            <xs:field xpath="MA_VATTU"/>
-        </xs:key>
-        <xs:keyref name="TTHKR1" refer="TPK">
-            <xs:selector xpath="TONTHAT"/>
-            <xs:field xpath="SO_PHIEU"/>
-        </xs:keyref>
-        <xs:keyref name="TTHKR2" refer="VTK">
-            <xs:selector xpath="TONTHAT"/>
-            <xs:field xpath="MA_VATTU"/>
         </xs:keyref>
     </xs:element>
 </xs:schema>

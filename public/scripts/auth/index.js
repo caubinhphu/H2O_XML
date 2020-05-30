@@ -25,6 +25,8 @@ document.loginForm.addEventListener('submit', function (e) {
     if (user) {
       setCookie('id', username, 1);
       location.href = '/letan/index.html';
+    } else {
+      $.notify('Đăng nhập thất bại', 'error');
     }
   } else {
     $.notify('Đăng nhập thất bại', 'error');
