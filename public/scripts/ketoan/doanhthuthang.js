@@ -10,12 +10,22 @@ xhr.send(null);
 document.formDate.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const date = e.target.elements.date.value;
-  if (date !== '') {
-    let sumTienPhong = 0;
-    const phongs = [...xml.getElementsByTagName('PHONG')];
+  const monthNeed = +e.target.elements.month.value;
+  const yearNeed = +e.target.elements.year.value;
 
-    const dateNeed = new Date(date);
+  if (
+    monthNeed !== 0 &&
+    yearNeed !== 0 &&
+    yearNeed <= new Date().getFullYear()
+  ) {
+    const minDate = new Date(yearNeed, monthNeed - 1, 1, 7);
+    const maxDate = new Date(yearNeed, monthNeed - 1, 1, 7);
+    maxDate.setMonth(maxDate.getMonth() + 1);
+    maxDate.setDate(maxDate.getDate() - 1);
+
+    let sumTienPhong = 0;
+
+    const phongs = [...xml.getElementsByTagName('PHONG')];
 
     const doanhThuTienPhong = {};
     phongs.forEach((phong) => {
@@ -27,7 +37,12 @@ document.formDate.addEventListener('submit', function (e) {
     ].filter((phieu) => {
       const dateDen = new Date(phieu.querySelector('NGAYDEN').innerHTML);
       const dateDi = new Date(phieu.querySelector('NGAYDI').innerHTML);
-      return dateDen - dateNeed <= 0 && dateDi - dateNeed >= 0;
+      return (
+        (dateDen.getMonth() + 1 === monthNeed &&
+          dateDen.getFullYear() === yearNeed) ||
+        (dateDi.getMonth() + 1 === monthNeed &&
+          dateDi.getFullYear() === yearNeed)
+      );
     });
 
     // tính tiền phòng
@@ -41,20 +56,62 @@ document.formDate.addEventListener('submit', function (e) {
         }
       );
 
-      ctThuePhong.forEach((ct) => {
-        doanhThuTienPhong[
-          ct.querySelector('MAPHONG').innerHTML
-        ] += +ct.querySelector('GIAPHONG').innerHTML;
-        sumTienPhong += +ct.querySelector('GIAPHONG').innerHTML;
-      });
+      const dateDen = new Date(phieu.querySelector('NGAYDEN').innerHTML);
+      const dateDi = new Date(phieu.querySelector('NGAYDI').innerHTML);
+
+      if (dateDen - minDate >= 0) {
+        if (dateDi - maxDate <= 0) {
+          ctThuePhong.forEach((ct) => {
+            doanhThuTienPhong[ct.querySelector('MAPHONG').innerHTML] +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((dateDi - dateDen) / 864e5);
+            sumTienPhong +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((dateDi - dateDen) / 864e5);
+          });
+        } else {
+          ctThuePhong.forEach((ct) => {
+            doanhThuTienPhong[ct.querySelector('MAPHONG').innerHTML] +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((maxDate - dateDen) / 864e5);
+            sumTienPhong +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((maxDate - dateDen) / 864e5);
+          });
+        }
+      } else {
+        if (dateDi - maxDate <= 0) {
+          ctThuePhong.forEach((ct) => {
+            doanhThuTienPhong[ct.querySelector('MAPHONG').innerHTML] +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((dateDi - minDate) / 864e5);
+            sumTienPhong +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((dateDi - minDate) / 864e5);
+          });
+        } else {
+          ctThuePhong.forEach((ct) => {
+            doanhThuTienPhong[ct.querySelector('MAPHONG').innerHTML] +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((maxDate - minDate) / 864e5);
+            sumTienPhong +=
+              +ct.querySelector('GIAPHONG').innerHTML *
+              Math.floor((maxDate - minDate) / 864e5);
+          });
+        }
+      }
     });
 
-    let doanhThuDichVu = 0;
     // tính tiền dịch vụ
+    let doanhThuDichVu = 0;
+
     phieuThuePhongs
       .filter((phieu) => {
         const dateDi = new Date(phieu.querySelector('NGAYDI').innerHTML);
-        return dateDi - dateNeed === 0;
+        return (
+          dateDi.getMonth() + 1 === monthNeed &&
+          dateDi.getFullYear() === yearNeed
+        );
       })
       .forEach((phieu) => {
         const ctThuePhong = [...xml.querySelectorAll('CT_THUE_DICHVU')].filter(
@@ -99,6 +156,6 @@ document.formDate.addEventListener('submit', function (e) {
 
     document.querySelector('table').style.display = 'table';
   } else {
-    $.notify('Chưa nhập ngày cần tính doanh thu', 'warn');
+    $.notify('Chưa nhập tháng cần tính doanh thu', 'warn');
   }
 });
