@@ -44,17 +44,22 @@
 
     <!-- Main container -->
     <div id="main" class="p-3">
-      <h1 class="text-center my-2">DANH SÁCH HÓA ĐƠN</h1>
-      <table class="table table-sm text-center table-bordered">
+      <h1 class="text-center my-2">DOANH THU NGÀY</h1>
+      
+      <form name="formDate">
+        <div class="form-group w-50 mx-auto d-flex align-items-center">
+          <label for="date" class="col-4">Ngày tính doanh thu</label>
+          <input type="date" class="form-control" id="date" name="date">
+          <button type="submit" class="btn btn-success ml-2">Tính</button>
+        </div>
+      </form>
+
+      <table class="table table-sm text-center table-bordered w-100 table-striped" style="display: none;">
           <thead>
               <tr>
                   <th>STT</th>
-                  <th>Mã phiếu</th>
-                  <th>Ngày đến</th>
-                  <th>Ngày đi</th>
+                  <th>Phòng</th>
                   <th>Tổng tiền phòng</th>
-                  <th>Tổng tiền dịch vụ</th>
-                  <th>Tổng tiền</th>
               </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -103,7 +108,7 @@
     </section>
 
     <script src="../public/scripts/cookie.js"></script>
-    <script src="../public/scripts/ketoan/index.js"></script>
+    <script src="../public/scripts/ketoan/doanhthungay.js"></script>
 </body>
 
 </html>
