@@ -24,6 +24,12 @@ xhr2.onload = function () {
   const text = doc.firstElementChild.outerHTML;
 
   document.getElementById('main').innerHTML = text;
+
+  document.querySelectorAll('.phong').forEach(phong => {
+    phong.addEventListener('click', function() {
+      location.href = `/letan/phong.html?id=${this.dataset.idphong}`
+    })
+  })
 };
 
 xhr2.send(null);
