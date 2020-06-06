@@ -18,6 +18,7 @@ xhr.onload = function () {
         const maLoaiPhong = phong.querySelector('MA_LOAIPHONG').innerHTML;
         const loaiPhong = [...xml.getElementsByTagName('LOAIPHONG')]
             .find(lp => lp.querySelector('MA_LOAIPHONG').innerHTML === maLoaiPhong);
+    
         
         if (loaiPhong) {
             document.getElementById('loaiphong').innerHTML = loaiPhong.querySelector('TEN_LOAIPHONG').innerHTML;
@@ -57,15 +58,22 @@ xhr.onload = function () {
             console.log(phieuThuePhong)
             document.getElementById('phieuthue').innerHTML =
                 `<hr>
-                <div class="text-center"><h5>PHIEU THUE PHONG</h5></div>
-                <div>SO PHIEU: ${phieuThuePhong.querySelector('SO_PHIEU').innerHTML}</div>
-                <div>MA KHACH: ${phieuThuePhong.querySelector('MAKHACH').innerHTML}</div>
-                <div>MA NHÂN VIÊN: ${phieuThuePhong.querySelector('MA_NHANVIEN').innerHTML}</div>
+                <div class="text-center"><h5>PHIẾU THUÊ PHÒNG</h5></div>
+                <div class="text-center">
+                <div>SỐ PHIẾU: ${phieuThuePhong.querySelector('SO_PHIEU').innerHTML}</div>
+                <div>MÃ KHÁCH: ${phieuThuePhong.querySelector('MAKHACH').innerHTML}</div>
+                <div>MÃ NHÂN VIÊN: ${phieuThuePhong.querySelector('MA_NHANVIEN').innerHTML}</div>
                 <div>NGÀY LẬP PHIẾU: ${phieuThuePhong.querySelector('NGAYLAP_PHIEU').innerHTML}</div>
                 <div>NGÀY ĐẾN: ${phieuThuePhong.querySelector('NGAYDEN').innerHTML}</div>
                 <div>NGÀY ĐI: ${phieuThuePhong.querySelector('NGAYDI').innerHTML}</div>
+                </div>
                 `;
         }
+
+        document.getElementById('giaphong').innerHTML = phong.querySelector('GIAPHONG').innerHTML;
+        const giaphong = phong.querySelector('GIAPHONG').innerHTML;
+        const gp = [...xml.getElementsByTagName('PHONG')]
+            .find(giap => giap.querySelector('GIAPHONG').innerHTML === giaphong);
         
         
         

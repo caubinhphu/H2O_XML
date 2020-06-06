@@ -48,34 +48,36 @@
   <!-- Main container -->
   <div id="main" class="p-3">
     <div class="text-center mb-3">
-      <h3>THONG TIN PHONG</h3>
+      <h3 class="bg-info text-white">THÔNG TIN PHÒNG</h3>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="text-center">
+      <div class="col mt-1 d-block  border border-danger bg-warning">
         <div>
-          <span>MA PHONG: </span>
-          <span id="maphong"></span>
+          <span style="font-weight: bold;float:left;">Mã phòng: </span>
+          <span style="margin-left: 50px;" class="text-primary" id="maphong"></span>
         </div>
         <div>
-          <span>LOAI PHONG: </span>
-          <span id="loaiphong"></span>
+          <span style="font-weight: bold;float: left; ">Loại phòng: </span>
+          <span style="margin-left: 50px;" class="text-primary"id="loaiphong"></span>
         </div>
         <div>
-          <span>KÍCH THƯỚC: </span>
-          <span id="kichthuoc"></span>
+          <span style="font-weight: bold;float: left;">Giá phòng: </span>
+          <span style="margin-left: 50px;" class="text-primary" id="giaphong"></span>
         </div>
       </div>
-      <div class="col">
+    </div>
+      <div class="col ">
         <div class="text-center">
-          <h5>Vat tu</h5>
+          <h5 class="bg-success text-white">Vật tư</h5>
         </div>
-        <div>
-          <table class="table table-sm">
+        <div class="bg-primary">
+          <table class="table table-sm text-white">
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Ten vat tu</th>
-                <th>So luong</th>
+                <th>Tên vật tư</th>
+                <th>Số lượng</th>
               </tr>
             </thead>
             <tbody id="vattuBody"></tbody>
@@ -83,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div id="phieuthue"></div>
+    <div id="phieuthue" class="bg-warning"></div>
   </div>
 
   <!-- Footer container -->
