@@ -7,7 +7,7 @@
     
     <xsl:template match="/">
         <div>
-            <h1 class="text-center my-2">Danh Sách Dịch Vụ</h1>
+            <h1 class="text-center my-2">Danh Sách Phòng</h1>
             <table class="table table-sm">
                 <thead>
                     <tr>
@@ -72,12 +72,13 @@
                             <td>
                                 <input type="submit" id="btn_xoa" name="btn_xoa" value="Xóa" />
                             </td>
+                            
+                            </tr>
+                            
+                     </xsl:for-each>
                             <td>
                                 <input type="submit" id="btn_them" name="btn_them" value="Thêm" />
                             </td>
-                            </tr>
-                        
-                     </xsl:for-each>
                 </tbody>
             </table>
             
