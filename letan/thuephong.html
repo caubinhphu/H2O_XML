@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../public/styles/bootstrap.min.css" />
+        <link rel="stylesheet" href="../public/styles/danhsachPhong.css" />
+        <link rel="stylesheet" href="../public/styles/fontawesome-free/css/all.min.css" />
+        <link rel="stylesheet" href="../public/styles/danhsachPhong.css" />
+        <script src="../public/scripts/jquery.js"></script>
+        <script src="../public/scripts/popper.min.js"></script>
+        <script src="../public/scripts/bootstrap.min.js"></script>
+        <script src="../public/scripts/notify.min.js"></script>
+      </head>    
+<body>
+    <div class="container">
+      <h3 class="text-center bg-info text-white">THÊM KHÁCH THUÊ PHÒNG</h3>
+        <form action="#">
+          <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="makhach">Mã khách thuê</label>
+              <input type="text" class="form-control" placeholder="Nhập mã tại đây...!" id="makhach">
+            </div>
+            <div class="form-group">
+              <label for="name">Họ tên khách:</label>
+              <input type="text" class="form-control" placeholder="Nhập họ tên...!" id="hoten">
+            </div>
+            <div class="form-group">
+              <label for="CMND">CMND/PassPort</label>
+              <input type="text" class="form-control" placeholder="Nhập CMND/PassPort...!" id="cmnd">
+            </div>
+            <div class="form-group">
+              <label for="dt">Điện thoại:</label>
+              <input type="number" class="form-control" placeholder="Nhập số điện thoại...!" id="sdt">
+            </div>
+            <div class="form-group">
+              <label for="qt">Quốc tịch :</label>
+              <input type="text" class="form-control" placeholder="Nhập quốc tịch...!" id="quoctich">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="nd">Ngày đến:</label>
+              <input type="date" class="form-control" placeholder="Nhập ngày đến...!" id="ngayden">
+            </div>
+            <div class="form-group">
+              <label for="nd">Ngày đi :</label>
+              <input type="date" class="form-control" placeholder="Nhập ngày đi...!" id="ngaydi">
+            </div>
+            <div class="form-group">
+              <label for="tlp">Tên loại phòng:</label>
+              <input type="text" class="form-control" placeholder="Nhập tên loại phòng...!" id="tenloaiphong">
+            </div>
+            <div class="form-group">
+              <label for="slp">Số lượng phòng :</label>
+              <input type="number" class="form-control" placeholder="Nhập số lượng phòng...!" id="soluong">
+            </div>
+            <div class="form-group">
+              <label for="gia">Giá phòng :</label>
+              <input type="number" class="form-control" placeholder="Nhập giá phòng...!" id="giatien">
+            </div>
+          </div>
+        </div>
+        <div class="d-block text-center m-2">
+            <button class="btn btn-primary" onclick="addCustomer();" id="btn-them">Thêm</button>
+        </div>
+          </form>
+              <div style="display:none;" id="hien">
+                <h3 class="text-center bg-warning text-white">CHI TIẾT PHIẾU THUÊ PHÒNG</h3>
+                <table id="table" class=" table table-bordered">
+                  <tr>
+                    <th>Mã khách thuê</th>
+                    <th>Họ tên khách</th>
+                    <th>CMND/PassPort</th>
+                    <th>Điện thoại</th>
+                    <th>Quốc tịch </th>
+                    <th>Ngày đến</th>
+                    <th>Ngày đi</th>
+                    <th>Tên loại phòng</th>
+                    <th>Số lượng phòng</th>
+                    <th>Giá phòng</th>
+                  </tr>
+                </table>
+            </div>
+    </div>
+    <script>
+      function addCustomer()
+      {
+        var table = document.getElementById("table"),
+            newRow = table.insertRow(table.length),
+            cell1 = newRow.insertCell(0),
+            cell2 = newRow.insertCell(1),
+            cell3 = newRow.insertCell(2),
+            cell4 = newRow.insertCell(3),
+            cell5 = newRow.insertCell(4),
+            cell6 = newRow.insertCell(5),
+            cell7 = newRow.insertCell(6),
+            cell8 = newRow.insertCell(7),
+            cell9 = newRow.insertCell(8)
+            cell10 = newRow.insertCell(9)
+            makhach= document.getElementById("makhach").value;
+            hoten = document.getElementById("hoten").value;
+            cmnd = document.getElementById("cmnd").value;
+            dienthoai= document.getElementById("sdt").value;
+            quoctich = document.getElementById("quoctich").value;
+            ngayden = document.getElementById("ngayden").value;
+            ngaydi = document.getElementById("ngaydi").value;
+            tenloaiphong = document.getElementById("tenloaiphong").value;
+            soluong = document.getElementById("soluong").value;
+            giatien = document.getElementById("giatien").value;
+            cell1.innerHTML = makhach;
+            cell2.innerHTML = hoten;
+            cell3.innerHTML = cmnd;
+            cell4.innerHTML = dienthoai;
+            cell5.innerHTML = quoctich;
+            cell6.innerHTML = ngayden;
+            cell7.innerHTML = ngaydi;
+            cell8.innerHTML = tenloaiphong;
+            cell9.innerHTML = soluong;
+            cell10.innerHTML = giatien;
+            $("#btn-them").click(hienForm)
+
+            function hienForm(){
+              $("#hien").css("display","block");
+            }
+      }
+    </script>
+</body>
+</html>
